@@ -7,7 +7,11 @@ RUN apt-get update && apt-get install -y \
     unzip \
     curl \
     libpq-dev \
-    && docker-php-ext-install pdo_pgsql pgsql \
+    libpng-dev \
+    libjpeg62-turbo-dev \
+    libfreetype6-dev \
+    && docker-php-ext-configure gd --with-freetype --with-jpeg \
+    && docker-php-ext-install pdo_pgsql pgsql gd \
     && rm -rf /var/lib/apt/lists/*
 
 # 2) Добавляем Composer внутрь контейнера
